@@ -87,36 +87,67 @@ const Index = () => {
       {/* Header */}
       <header className="text-white py-4" style={{ backgroundImage: 'linear-gradient( 98.7deg,  rgba(34,175,245,1) 2.8%, rgba(98,247,151,1) 97.8% )' }}>
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
-            {/* Left side: Kalasalingam logo (half navbar) */}
-            <div className="flex-1 flex items-center justify-start">
-              <img
-                src="https://www.kalasalingam.ac.in/wp-content/uploads/2022/02/Logo.png"
-                alt="Kalasalingam Logo"
-                className="h-24 w-auto max-w-[50%] object-contain"
-                style={{ background: 'transparent' }}
-              />
-            </div>
-            {/* Center: Title and Button */}
-            <div className="flex flex-col items-center flex-shrink-0 px-4">
-              <h1 className="text-2xl font-bold">GDG Workshop</h1>
-              <p className="text-white/80 text-base mb-2">Feedback Portal</p>
+          {/* Mobile Layout: Stacked */}
+          <div className="md:hidden flex flex-col items-center space-y-4">
+            {/* Top Logo */}
+            <img
+              src="https://www.kalasalingam.ac.in/wp-content/uploads/2022/02/Logo.png"
+              alt="Kalasalingam Logo"
+              className="h-20 w-auto max-w-[60%] object-contain"
+              style={{ background: 'transparent' }}
+            />
+            {/* Center Content */}
+            <div className="flex flex-col items-center">
+              <h1 className="text-xl font-bold text-center">GDG Workshop</h1>
+              <p className="text-white/80 text-sm mb-3 text-center">Feedback Portal</p>
               <Button 
                 variant="secondary"
                 onClick={() => navigate("/feedback")}
-                className="bg-white/20 hover:bg-white/30 text-white border-white/30 mt-2"
+                className="bg-white/20 hover:bg-white/30 text-white border-white/30 text-sm px-4 py-2"
               >
                 Give Feedback
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </div>
-            {/* Right side: Kalasalingam logo (half navbar) */}
+            {/* Bottom Logo */}
+            <img
+              src="/gdg_logo.png"
+              alt="GDG Logo"
+              className="h-20 w-auto max-w-[60%] object-contain"
+              style={{ background: 'transparent' }}
+            />
+          </div>
+
+          {/* Desktop Layout: Side by side */}
+          <div className="hidden md:flex items-center justify-between">
+            {/* Left side: Kalasalingam logo */}
+            <div className="flex-1 flex items-center justify-start">
+              <img
+                src="https://www.kalasalingam.ac.in/wp-content/uploads/2022/02/Logo.png"
+                alt="Kalasalingam Logo"
+                className="h-24 w-auto max-w-[40%] object-contain"
+                style={{ background: 'transparent' }}
+              />
+            </div>
+            {/* Center: Title and Button */}
+            <div className="flex flex-col items-center flex-shrink-0 px-4">
+              <h1 className="text-2xl font-bold text-center">GDG Workshop</h1>
+              <p className="text-white/80 text-base mb-2 text-center">Feedback Portal</p>
+              <Button 
+                variant="secondary"
+                onClick={() => navigate("/feedback")}
+                className="bg-white/20 hover:bg-white/30 text-white border-white/30 mt-2 text-sm px-4 py-2"
+              >
+                Give Feedback
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+            {/* Right side: GDG logo */}
             <div className="flex-1 flex items-center justify-end">
-              {/* Ensure gdg_logo.png is placed in the public/ directory */}
               <img
                 src="/gdg_logo.png"
-                alt="Kalasalingam Logo"
-                className="h-24 w-auto max-w-[50%] object-contain"
+                alt="GDG Logo"
+                className="h-24 w-auto max-w-[40%] object-contain"
                 style={{ background: 'transparent' }}
               />
             </div>
