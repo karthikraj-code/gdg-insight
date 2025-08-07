@@ -52,6 +52,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				workshop: {
+					primary: 'hsl(var(--workshop-primary))',
+					accent: 'hsl(var(--workshop-accent))',
+					success: 'hsl(var(--workshop-success))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -88,7 +93,16 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 3s ease-in-out infinite',
+				'slide-in': 'slide-in 0.5s ease-out'
+			},
+			backgroundImage: {
+				'workshop-gradient': 'var(--workshop-gradient)'
+			},
+			boxShadow: {
+				'workshop': 'var(--workshop-card-shadow)',
+				'workshop-hover': 'var(--workshop-hover-shadow)'
 			}
 		}
 	},
