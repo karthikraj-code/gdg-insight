@@ -15,8 +15,11 @@ const Feedback = () => {
     name: "",
     email: "",
     rating_day1: "",
+    understanding_day1: "",
     rating_day2: "",
+    understanding_day2: "",
     rating_day3: "",
+    understanding_day3: "",
     favorite_part: "",
     suggestions: "",
     future_topics: "",
@@ -104,7 +107,7 @@ const Feedback = () => {
                     { day: 2, title: "Collaboration", description: "git remote, push, branch, checkout, merge, GitHub Pages" },
                     { day: 3, title: "Advanced Topics", description: "Merge conflicts & open source contribution" }
                   ].map(({ day, title, description }) => (
-                    <div key={day} className="p-4 border rounded-lg">
+                    <div key={day} className="p-4 border rounded-lg space-y-3">
                       <div className="mb-2">
                         <Label className="font-medium">Day {day}: {title}</Label>
                         <p className="text-sm text-muted-foreground">{description}</p>
@@ -124,6 +127,20 @@ const Feedback = () => {
                           <SelectItem value="1">1 - Poor</SelectItem>
                         </SelectContent>
                       </Select>
+                      
+                      <div>
+                        <Label htmlFor={`understanding_day${day}`} className="text-sm">
+                          What key concepts did you understand from Day {day}?
+                        </Label>
+                        <Textarea
+                          id={`understanding_day${day}`}
+                          value={formData[`understanding_day${day}` as keyof typeof formData]}
+                          onChange={(e) => setFormData(prev => ({ ...prev, [`understanding_day${day}`]: e.target.value }))}
+                          placeholder={`Describe what you learned and understood from Day ${day}...`}
+                          rows={2}
+                          className="mt-1"
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
