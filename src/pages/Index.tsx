@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { GitBranch, Code, Users2, ArrowRight } from "lucide-react";
+import { GitBranch, Code, Users2, ArrowRight, Github, Terminal, FileCode, GitMerge, GitPullRequest, GitCommit } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import WorkshopBanner from "@/components/WorkshopBanner";
 import WorkshopDay from "@/components/WorkshopDay";
@@ -47,7 +47,26 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* 3D Background Icons */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Github className="absolute top-20 left-10 w-16 h-16 text-muted-foreground/20 animate-float transform rotate-12 hover:scale-110 transition-transform duration-300" 
+               style={{ animationDelay: '0s' }} />
+        <Terminal className="absolute top-32 right-20 w-12 h-12 text-muted-foreground/15 animate-float transform -rotate-12 hover:scale-110 transition-transform duration-300" 
+                 style={{ animationDelay: '1s' }} />
+        <GitBranch className="absolute top-64 left-1/4 w-20 h-20 text-muted-foreground/10 animate-float transform rotate-45 hover:scale-110 transition-transform duration-300" 
+                   style={{ animationDelay: '2s' }} />
+        <FileCode className="absolute bottom-40 right-10 w-14 h-14 text-muted-foreground/20 animate-float transform -rotate-6 hover:scale-110 transition-transform duration-300" 
+                  style={{ animationDelay: '3s' }} />
+        <GitMerge className="absolute bottom-20 left-16 w-18 h-18 text-muted-foreground/15 animate-float transform rotate-30 hover:scale-110 transition-transform duration-300" 
+                  style={{ animationDelay: '0.5s' }} />
+        <GitPullRequest className="absolute top-80 right-1/3 w-16 h-16 text-muted-foreground/10 animate-float transform -rotate-30 hover:scale-110 transition-transform duration-300" 
+                        style={{ animationDelay: '1.5s' }} />
+        <GitCommit className="absolute bottom-60 left-1/3 w-12 h-12 text-muted-foreground/20 animate-float transform rotate-60 hover:scale-110 transition-transform duration-300" 
+                   style={{ animationDelay: '2.5s' }} />
+        <Code className="absolute top-48 left-3/4 w-14 h-14 text-muted-foreground/15 animate-float transform -rotate-45 hover:scale-110 transition-transform duration-300" 
+              style={{ animationDelay: '3.5s' }} />
+      </div>
       {/* Header */}
       <header className="bg-workshop-gradient text-white py-4">
         <div className="container mx-auto px-4">
