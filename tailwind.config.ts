@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Google Sans', 'Roboto', 'system-ui', '-apple-system', 'sans-serif'],
+				display: ['Google Sans Display', 'Google Sans', 'Roboto', 'system-ui', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
