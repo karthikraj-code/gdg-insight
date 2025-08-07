@@ -71,23 +71,38 @@ const Index = () => {
       <header className="bg-workshop-gradient text-white py-4">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
-                <GitBranch className="w-6 h-6" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold">GDG Workshop</h1>
-                <p className="text-white/80 text-sm">Feedback Portal</p>
-              </div>
+            {/* Left side: Kalasalingam logo (half navbar) */}
+            <div className="flex-1 flex items-center justify-start">
+              <img
+                src="https://www.kalasalingam.ac.in/wp-content/uploads/2022/02/Logo.png"
+                alt="Kalasalingam Logo"
+                className="h-24 w-auto max-w-[50%] object-contain"
+                style={{ background: 'transparent' }}
+              />
             </div>
-            <Button 
-              variant="secondary"
-              onClick={() => navigate("/feedback")}
-              className="bg-white/20 hover:bg-white/30 text-white border-white/30"
-            >
-              Give Feedback
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
+            {/* Center: Title and Button */}
+            <div className="flex flex-col items-center flex-shrink-0 px-4">
+              <h1 className="text-2xl font-bold">GDG Workshop</h1>
+              <p className="text-white/80 text-base mb-2">Feedback Portal</p>
+              <Button 
+                variant="secondary"
+                onClick={() => navigate("/feedback")}
+                className="bg-white/20 hover:bg-white/30 text-white border-white/30 mt-2"
+              >
+                Give Feedback
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+            {/* Right side: Kalasalingam logo (half navbar) */}
+            <div className="flex-1 flex items-center justify-end">
+              {/* Ensure gdg_logo.png is placed in the public/ directory */}
+              <img
+                src="/gdg_logo.png"
+                alt="Kalasalingam Logo"
+                className="h-24 w-auto max-w-[50%] object-contain"
+                style={{ background: 'transparent' }}
+              />
+            </div>
           </div>
         </div>
       </header>
@@ -146,7 +161,7 @@ const Index = () => {
       <footer className="bg-muted py-8 mt-16">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
-            Made with ❤️ by the GDG Team • Powered by Lovable & Supabase
+            Made with ❤️ by the Google Developers Group Kare(GDG) Team
           </p>
         </div>
       </footer>
