@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { GitBranch, Code, Users2, ArrowRight, Github, Terminal, FileCode, GitMerge, GitPullRequest, GitCommit } from "lucide-react";
+import { GitBranch, Code, Users2, ArrowRight, Github, Terminal, FileCode, GitMerge, GitPullRequest, GitCommit, ExternalLink, Linkedin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import WorkshopBanner from "@/components/WorkshopBanner";
 import WorkshopDay from "@/components/WorkshopDay";
@@ -46,6 +46,23 @@ const Index = () => {
     }
   ];
 
+  const speakers = [
+    {
+      name: "Keerthi Kumar",
+      role: "Workshop Speaker",
+      image: "/keerthi-bro.jpg", // Update with actual image path
+      linkedin: "https://www.linkedin.com/in/keerthi-kumar10", // Update with actual LinkedIn URL
+      github: "https://github.com/keerthikmr" // Update with actual GitHub URL
+    },
+    {
+      name: "Bharat Kumar",
+      role: "Workshop Speaker", 
+      image: "/bharat.jpg", // Update with actual image path
+      linkedin: "https://www.linkedin.com/in/bharath-kumar-inukurthi", // Update with actual LinkedIn URL
+      github: "https://github.com/bharath-inukurthi" // Update with actual GitHub URL
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* 3D Background Icons */}
@@ -68,7 +85,7 @@ const Index = () => {
               style={{ animationDelay: '3.5s' }} />
       </div>
       {/* Header */}
-      <header className="bg-workshop-gradient text-white py-4">
+      <header className="text-white py-4" style={{ backgroundImage: 'linear-gradient( 98.7deg,  rgba(34,175,245,1) 2.8%, rgba(98,247,151,1) 97.8% )' }}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
             {/* Left side: Kalasalingam logo (half navbar) */}
@@ -137,6 +154,52 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Speakers Section */}
+        <section className="mb-12">
+          <h3 className="text-2xl font-bold text-center text-workshop-primary mb-8">
+            Meet Our Speakers
+          </h3>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {speakers.map((speaker, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-workshop p-6 text-center hover:shadow-lg transition-shadow">
+                <div className="mb-4">
+                  <img
+                    src={speaker.image}
+                    alt={speaker.name}
+                    className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-workshop-primary/20"
+                  />
+                </div>
+                <h4 className="text-xl font-semibold text-workshop-primary mb-2">
+                  {speaker.name}
+                </h4>
+                <p className="text-muted-foreground mb-4">
+                  {speaker.role}
+                </p>
+                <div className="flex justify-center gap-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => window.open(speaker.linkedin, "_blank")}
+                    className="flex items-center gap-2"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    LinkedIn
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => window.open(speaker.github, "_blank")}
+                    className="flex items-center gap-2"
+                  >
+                    <Github className="w-4 h-4" />
+                    GitHub
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="text-center py-12 bg-workshop-gradient rounded-lg text-white">
           <h3 className="text-2xl font-bold mb-4">
@@ -160,9 +223,27 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-muted py-8 mt-16">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground">
-            Made with ❤️ by the Google Developers Group Kare(GDG) Team
-          </p>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <img
+              src="/new-gdg-logo.png"
+              alt="GDG Logo"
+              className="h-8 w-auto object-contain"
+            />
+            <p className="text-muted-foreground">
+              Made with ❤️ by the Google Developers Group Kare(GDG) Team
+            </p>
+          </div>
+          
+          <div className="flex justify-center">
+            <Button
+              onClick={() => window.open("https://linktr.ee/GDG_on_Campus_Kare", "_blank")}
+              className="bg-[#4285F4] hover:bg-[#1967d2] text-white"
+              size="sm"
+            >
+              <ExternalLink className="w-4 h-4 mr-2" />
+              Connect With Us
+            </Button>
+          </div>
         </div>
       </footer>
     </div>

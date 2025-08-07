@@ -6,8 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Send, Star } from "lucide-react";
+import { ArrowLeft, Send, Star, Github, Terminal, GitBranch, FileCode, GitMerge, GitPullRequest, GitCommit, Code } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Feedback = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Feedback = () => {
     attend_future: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate required fields
@@ -39,30 +40,87 @@ const Feedback = () => {
       return;
     }
 
-    // Here you would submit to Supabase
-    console.log("Form data:", { ...formData, submitted_at: new Date().toISOString() });
-    
-    toast({
-      title: "Feedback submitted!",
-      description: "Thank you for your valuable feedback.",
-    });
+    try {
+      // Submit to Supabase
+      const { data, error } = await supabase
+        .from('feedback_submissions')
+        .insert([
+          {
+            name: formData.name || null,
+            email: formData.email || null,
+            rating_day1: parseInt(formData.rating_day1),
+            understanding_day1: formData.understanding_day1 || null,
+            rating_day2: parseInt(formData.rating_day2),
+            understanding_day2: formData.understanding_day2 || null,
+            rating_day3: parseInt(formData.rating_day3),
+            understanding_day3: formData.understanding_day3 || null,
+            favorite_part: formData.favorite_part || null,
+            suggestions: formData.suggestions || null,
+            future_topics: formData.future_topics || null,
+            attend_future: formData.attend_future || null
+          }
+        ]);
 
-    navigate("/thank-you");
+      if (error) {
+        console.error('Supabase error:', error);
+        toast({
+          title: "Submission failed",
+          description: "There was an error submitting your feedback. Please try again.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      console.log("Feedback submitted successfully:", data);
+      
+      toast({
+        title: "Feedback submitted!",
+        description: "Thank you for your valuable feedback.",
+      });
+
+      navigate("/thank-you");
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      toast({
+        title: "Submission failed",
+        description: "There was an error submitting your feedback. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   return (
-    <div className="min-h-screen bg-background py-8">
-      <div className="container max-w-2xl mx-auto px-4">
+    <div className="min-h-screen py-8 relative overflow-hidden" style={{ backgroundImage: 'radial-gradient( circle farthest-corner at 10% 20%,  rgba(202,248,255,1) 0%, rgba(186,204,227,1) 51.2%, rgba(117,144,179,1) 100.1% )' }}>
+      {/* 3D Background Icons */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Github className="absolute top-20 left-10 w-16 h-16 text-orange-500/30 animate-float transform rotate-12 hover:scale-110 transition-transform duration-300" 
+               style={{ animationDelay: '0s' }} />
+        <Terminal className="absolute top-32 right-20 w-12 h-12 text-green-500/25 animate-float transform -rotate-12 hover:scale-110 transition-transform duration-300" 
+                 style={{ animationDelay: '1s' }} />
+        <GitBranch className="absolute top-64 left-1/4 w-20 h-20 text-blue-500/20 animate-float transform rotate-45 hover:scale-110 transition-transform duration-300" 
+                   style={{ animationDelay: '2s' }} />
+        <FileCode className="absolute bottom-40 right-10 w-14 h-14 text-purple-500/30 animate-float transform -rotate-6 hover:scale-110 transition-transform duration-300" 
+                  style={{ animationDelay: '3s' }} />
+        <GitMerge className="absolute bottom-20 left-16 w-18 h-18 text-red-500/25 animate-float transform rotate-30 hover:scale-110 transition-transform duration-300" 
+                  style={{ animationDelay: '0.5s' }} />
+        <GitPullRequest className="absolute top-80 right-1/3 w-16 h-16 text-indigo-500/20 animate-float transform -rotate-30 hover:scale-110 transition-transform duration-300" 
+                        style={{ animationDelay: '1.5s' }} />
+        <GitCommit className="absolute bottom-60 left-1/3 w-12 h-12 text-yellow-500/30 animate-float transform rotate-60 hover:scale-110 transition-transform duration-300" 
+                   style={{ animationDelay: '2.5s' }} />
+        <Code className="absolute top-48 left-3/4 w-14 h-14 text-teal-500/25 animate-float transform -rotate-45 hover:scale-110 transition-transform duration-300" 
+              style={{ animationDelay: '3.5s' }} />
+      </div>
+      <div className="container max-w-2xl mx-auto px-4 relative z-10">
         <Button 
           variant="ghost" 
           onClick={() => navigate("/")}
-          className="mb-6"
+          className="mb-6 bg-[#4285F4] text-white hover:bg-[#1967d2] hover:text-white"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
         </Button>
 
-        <Card className="shadow-workshop">
+        <Card className="shadow-workshop bg-white/95 backdrop-blur-sm border-white/20">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl text-workshop-primary">Workshop Feedback</CardTitle>
             <CardDescription>
@@ -74,7 +132,7 @@ const Feedback = () => {
               {/* Optional Contact Info */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="name">Name (optional)</Label>
+                  <Label htmlFor="name">Name</Label>
                   <Input
                     id="name"
                     value={formData.name}
@@ -83,7 +141,7 @@ const Feedback = () => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="email">Email (optional)</Label>
+                  <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
                     type="email"
@@ -107,7 +165,7 @@ const Feedback = () => {
                     { day: 2, title: "Collaboration", description: "git remote, push, branch, checkout, merge, GitHub Pages" },
                     { day: 3, title: "Advanced Topics", description: "Merge conflicts & open source contribution" }
                   ].map(({ day, title, description }) => (
-                    <div key={day} className="p-4 border rounded-lg space-y-3">
+                    <div key={day} className="p-4 border rounded-lg space-y-3 bg-white/50 backdrop-blur-sm border-white/30">
                       <div className="mb-2">
                         <Label className="font-medium">Day {day}: {title}</Label>
                         <p className="text-sm text-muted-foreground">{description}</p>
@@ -199,7 +257,7 @@ const Feedback = () => {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full bg-workshop-accent hover:bg-workshop-accent/90">
+              <Button type="submit" className="w-full" style={{ backgroundImage: 'linear-gradient( 98.7deg,  rgba(34,175,245,1) 2.8%, rgba(98,247,151,1) 97.8% )' }}>
                 <Send className="w-4 h-4 mr-2" />
                 Submit Feedback
               </Button>
