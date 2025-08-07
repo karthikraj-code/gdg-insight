@@ -161,14 +161,13 @@ const Feedback = () => {
                 
                 <div className="grid gap-4">
                   {[
-                    { day: 1, title: "Git Basics", description: "git init, add, commit, version control" },
-                    { day: 2, title: "Collaboration", description: "git remote, push, branch, checkout, merge, GitHub Pages" },
-                    { day: 3, title: "Advanced Topics", description: "Merge conflicts & open source contribution" }
-                  ].map(({ day, title, description }) => (
+                    { day: 1, title: "Git Basics" },
+                    { day: 2, title: "Collaboration" },
+                    { day: 3, title: "Advanced Topics" }
+                  ].map(({ day, title}) => (
                     <div key={day} className="p-4 border rounded-lg space-y-3 bg-white/50 backdrop-blur-sm border-white/30">
                       <div className="mb-2">
                         <Label className="font-medium">Day {day}: {title}</Label>
-                        <p className="text-sm text-muted-foreground">{description}</p>
                       </div>
                       <Select 
                         value={formData[`rating_day${day}` as keyof typeof formData]} 
@@ -188,7 +187,7 @@ const Feedback = () => {
                       
                       <div>
                         <Label htmlFor={`understanding_day${day}`} className="text-sm">
-                          What key concepts did you understand from Day {day}?
+                          What's the Feedback of Day {day}?
                         </Label>
                         <Textarea
                           id={`understanding_day${day}`}

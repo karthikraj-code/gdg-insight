@@ -13,10 +13,10 @@ const Index = () => {
       title: "Git Fundamentals",
       description: "Master the basics of version control and local repository management",
       topics: [
-        "Understanding version control",
+        "Understanding Git and version control",
         "git init, add, commit workflow", 
         "Working with local repositories",
-        "Viewing history and changes"
+        
       ],
       icon: <GitBranch className="w-5 h-5" />
     },
@@ -26,8 +26,10 @@ const Index = () => {
       description: "Learn remote repositories and collaborative development workflows",
       topics: [
         "git remote and push operations",
+        "Viewing history and changes",
         "Branch management and checkout", 
         "Merging strategies",
+        "git investigation",
         "GitHub Pages deployment"
       ],
       icon: <Users2 className="w-5 h-5" />
@@ -35,10 +37,10 @@ const Index = () => {
     {
       day: 3,
       title: "Advanced Workflows", 
-      description: "Handle complex scenarios and contribute to open source projects",
+      description: "Handle complex scenarios and contribute to the projects",
       topics: [
         "Resolving merge conflicts",
-        "Open source contribution process",
+        "collaboration techniques",
         "Advanced Git techniques", 
         "Best practices and tips"
       ],
