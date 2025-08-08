@@ -41,8 +41,8 @@ const Index = () => {
       topics: [
         "Resolving merge conflicts",
         "collaboration techniques",
-        "Advanced Git techniques", 
-        "Best practices and tips"
+        "What is open source ", 
+        "How to contribute to open source"
       ],
       icon: <Code className="w-5 h-5" />
     }

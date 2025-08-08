@@ -30,11 +30,19 @@ const Feedback = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate required fields
-    if (!formData.rating_day1 || !formData.rating_day2 || !formData.rating_day3) {
+    // Validate all required fields
+    const requiredFields = [
+      'name', 'email', 'rating_day1', 'rating_day2', 'rating_day3',
+      'understanding_day1', 'understanding_day2', 'understanding_day3',
+      'favorite_part', 'suggestions', 'future_topics', 'attend_future'
+    ];
+    
+    const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
+    
+    if (missingFields.length > 0) {
       toast({
-        title: "Missing ratings",
-        description: "Please rate all three days of the workshop.",
+        title: "Missing required information",
+        description: "Please fill in all required fields before submitting.",
         variant: "destructive"
       });
       return;
@@ -124,30 +132,32 @@ const Feedback = () => {
           <CardHeader className="text-center">
             <CardTitle className="text-2xl text-workshop-primary">Workshop Feedback</CardTitle>
             <CardDescription>
-              Help us improve by sharing your experience from the 3-day Git & GitHub workshop
+              Help us improve by sharing your experience from the 3-day Git & GitHub workshop. All fields marked with <span className="text-red-500">*</span> are required.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Optional Contact Info */}
+              {/* Required Contact Info */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name">Name <span className="text-red-500">*</span></Label>
                   <Input
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                     placeholder="Your name"
+                    required
                   />
                 </div>
                 <div>
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">Email <span className="text-red-500">*</span></Label>
                   <Input
                     id="email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                     placeholder="your.email@example.com"
+                    required
                   />
                 </div>
               </div>
@@ -167,14 +177,15 @@ const Feedback = () => {
                   ].map(({ day, title}) => (
                     <div key={day} className="p-4 border rounded-lg space-y-3 bg-white/50 backdrop-blur-sm border-white/30">
                       <div className="mb-2">
-                        <Label className="font-medium">Day {day}: {title}</Label>
+                        <Label className="font-medium">Day {day}: {title} <span className="text-red-500">*</span></Label>
                       </div>
                       <Select 
                         value={formData[`rating_day${day}` as keyof typeof formData]} 
                         onValueChange={(value) => setFormData(prev => ({ ...prev, [`rating_day${day}`]: value }))}
+                        required
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Rate this day (1-5)" />
+                          <SelectValue placeholder="Rate this day (1-5) *" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="5">5 - Excellent</SelectItem>
@@ -187,15 +198,16 @@ const Feedback = () => {
                       
                       <div>
                         <Label htmlFor={`understanding_day${day}`} className="text-sm">
-                          What's the Feedback of Day {day}?
+                          What's the Feedback of Day {day}? <span className="text-red-500">*</span>
                         </Label>
                         <Textarea
                           id={`understanding_day${day}`}
                           value={formData[`understanding_day${day}` as keyof typeof formData]}
                           onChange={(e) => setFormData(prev => ({ ...prev, [`understanding_day${day}`]: e.target.value }))}
-                          placeholder={`Describe what you learned and understood from Day ${day}...`}
+                          placeholder={`Describe what you learned and understood from Day ${day}... *`}
                           rows={2}
                           className="mt-1"
+                          required
                         />
                       </div>
                     </div>
@@ -203,49 +215,53 @@ const Feedback = () => {
                 </div>
               </div>
 
-              {/* Open-ended Questions */}
+              {/* Required Open-ended Questions */}
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="favorite">What did you enjoy most about the workshop?</Label>
+                  <Label htmlFor="favorite">What did you enjoy most about the workshop? <span className="text-red-500">*</span></Label>
                   <Textarea
                     id="favorite"
                     value={formData.favorite_part}
                     onChange={(e) => setFormData(prev => ({ ...prev, favorite_part: e.target.value }))}
-                    placeholder="Share what you liked most..."
+                    placeholder="Share what you liked most... *"
                     rows={3}
+                    required
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="suggestions">What could we improve for future workshops?</Label>
+                  <Label htmlFor="suggestions">What could we improve for future workshops? <span className="text-red-500">*</span></Label>
                   <Textarea
                     id="suggestions"
                     value={formData.suggestions}
                     onChange={(e) => setFormData(prev => ({ ...prev, suggestions: e.target.value }))}
-                    placeholder="Your suggestions for improvement..."
+                    placeholder="Your suggestions for improvement... *"
                     rows={3}
+                    required
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="future">What topics would you like to see in future workshops?</Label>
+                  <Label htmlFor="future">What topics would you like to see in future workshops? <span className="text-red-500">*</span></Label>
                   <Textarea
                     id="future"
                     value={formData.future_topics}
                     onChange={(e) => setFormData(prev => ({ ...prev, future_topics: e.target.value }))}
-                    placeholder="Suggest topics for future events..."
+                    placeholder="Suggest topics for future events... *"
                     rows={3}
+                    required
                   />
                 </div>
 
                 <div>
-                  <Label>Would you attend future GDG workshops?</Label>
+                  <Label>Would you attend future GDG workshops? <span className="text-red-500">*</span></Label>
                   <Select 
                     value={formData.attend_future} 
                     onValueChange={(value) => setFormData(prev => ({ ...prev, attend_future: value }))}
+                    required
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select your interest level" />
+                      <SelectValue placeholder="Select your interest level *" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="yes">Yes, definitely!</SelectItem>
