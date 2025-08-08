@@ -15,6 +15,7 @@ const Feedback = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    lab: "",
     rating_day1: "",
     understanding_day1: "",
     rating_day2: "",
@@ -32,7 +33,7 @@ const Feedback = () => {
     
     // Validate all required fields
     const requiredFields = [
-      'name', 'email', 'rating_day1', 'rating_day2', 'rating_day3',
+      'name', 'email', 'lab', 'rating_day1', 'rating_day2', 'rating_day3',
       'understanding_day1', 'understanding_day2', 'understanding_day3',
       'favorite_part', 'suggestions', 'future_topics', 'attend_future'
     ];
@@ -56,6 +57,7 @@ const Feedback = () => {
           {
             name: formData.name || null,
             email: formData.email || null,
+            lab: formData.lab || null,
             rating_day1: parseInt(formData.rating_day1),
             understanding_day1: formData.understanding_day1 || null,
             rating_day2: parseInt(formData.rating_day2),
@@ -160,6 +162,24 @@ const Feedback = () => {
                     required
                   />
                 </div>
+              </div>
+
+              {/* Lab Selection */}
+              <div>
+                <Label htmlFor="lab">Lab <span className="text-red-500">*</span></Label>
+                <Select 
+                  value={formData.lab} 
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, lab: value }))}
+                  required
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your lab *" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="8301A">8301A</SelectItem>
+                    <SelectItem value="8301B">8301B</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Day Ratings */}
