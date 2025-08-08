@@ -263,7 +263,7 @@ const Index = () => {
               className="h-8 w-auto object-contain"
             />
             <p className="text-muted-foreground">
-              Made with ❤️ by the Google Developers Group Kare(GDG) Team
+              Made with ❤️ by the Google Developers Group KARE(GDG) Team
             </p>
           </div>
           
