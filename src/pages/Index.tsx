@@ -166,7 +166,7 @@ const Index = () => {
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Thank you for joining our intensive 3-day Git & GitHub workshop. 
-            We hope you had an amazing learning experience!
+            We hope you had an amazing learning experience
           </p>
         </div>
 
