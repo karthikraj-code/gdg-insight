@@ -162,7 +162,7 @@ const Index = () => {
         {/* Welcome Section */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-workshop-primary mb-4">
-            Welcome Workshop Attendees! 👋
+            Welcome, Workshop Attendees! 👋
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Thank you for joining our intensive 3-day Git & GitHub workshop. 
